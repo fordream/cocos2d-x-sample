@@ -109,30 +109,36 @@ bool HelloWorld::init()
 
         listener->onTouchEnded = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool {
             Point touch_point = touch->getLocation();
-            Rect pannel_sprite_rect = panel_sprite[0][0]->boundingBox();
 
-            if (pannel_sprite_rect.containsPoint(touch_point)) {
-                auto str = String::create("right2");
-                label->setString(str->getCString());
-
-                panel_sprite[0][0]->removeFromParentAndCleanup(true);
-                panel_sprite[0][0] = Sprite::create("right.png");
-                panel_sprite[0][0]->setAnchorPoint(Vec2(0.5, 0.5));
-                panel_sprite[0][0]->setPosition(origin.x + 170, origin.y + 100);
-                panel_sprite[0][0]->setScale(0.5f);
-                this->addChild(panel_sprite[0][0], 1);
-
+            //Rect pannel_sprite_rect = panel_sprite[0][0]->boundingBox();
+            Rect pannel_sprite_rect[6][6];
+            
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    pannel_sprite_rect[i][j] = panel_sprite[i][j]->boundingBox();
+                }
             }
+            
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    if (pannel_sprite_rect[i][j].containsPoint(touch_point)) {
+                        auto str = String::create("right2");
+                        label->setString(str->getCString());
+
+                        panel_sprite[i][j]->removeFromParentAndCleanup(true);
+                        panel_sprite[i][j] = Sprite::create("right.png");
+                        panel_sprite[i][j]->setAnchorPoint(Vec2(0.5, 0.5));
+                        panel_sprite[i][j]->setPosition(origin.x + 170 + i * 30, origin.y + 100 + j * 30);
+                        panel_sprite[i][j]->setScale(0.5f);
+                        this->addChild(panel_sprite[i][j], 1);
+                    }
+                }
+            }
+
             return true;
         };
         this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
         /*------------------------Event Listener end --------------------------------------*/
-
-
-
-
-
-
 
         return true;
     }

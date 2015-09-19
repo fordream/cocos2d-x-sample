@@ -6,7 +6,7 @@
 class HelloWorld : public cocos2d::Layer
 {
 private:
-    cocos2d::Sprite* field_sprite;
+    cocos2d::Sprite* back_sprite;
     cocos2d::Sprite* top_sprite;
     cocos2d::Sprite* bottom_sprite;
     cocos2d::Sprite* left_panel_sprite;

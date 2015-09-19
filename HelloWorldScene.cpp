@@ -1,4 +1,9 @@
 #include "HelloWorldScene.h"
+#define RIGHT 111
+#define LEFT 112
+#define UP 113
+#define DOWN 114
+
 
 USING_NS_CC;
 
@@ -72,21 +77,21 @@ bool HelloWorld::init()
 
 
         //left
-        left_panel_sprite = Sprite::create("right.png");
+        left_panel_sprite = Sprite::create("left.png");
         left_panel_sprite->setAnchorPoint(Vec2(0.5, 0.5));
         left_panel_sprite->setPosition(origin.x + 220, origin.y + 55);
         left_panel_sprite->setScale(0.5f);
         this->addChild(left_panel_sprite, 1);
 
         //up
-        up_panel_sprite = Sprite::create("right.png");
+        up_panel_sprite = Sprite::create("up.png");
         up_panel_sprite->setAnchorPoint(Vec2(0.5, 0.5));
         up_panel_sprite->setPosition(origin.x + 270, origin.y + 55);
         up_panel_sprite->setScale(0.5f);
         this->addChild(up_panel_sprite, 1);
 
         //down
-        down_panel_sprite = Sprite::create("right.png");
+        down_panel_sprite = Sprite::create("down.png");
         down_panel_sprite->setAnchorPoint(Vec2(0.5, 0.5));
         down_panel_sprite->setPosition(origin.x + 320, origin.y + 55);
         down_panel_sprite->setScale(0.5f);
@@ -99,10 +104,29 @@ bool HelloWorld::init()
             /*ƒ^ƒbƒ`Žž‚Ìˆ—*/
             Point touch_point = touch->getLocation();
             Rect right_sprite_rect = right_panel_sprite->boundingBox();
+            Rect left_sprite_rect = left_panel_sprite->boundingBox();
+            Rect up_sprite_rect = up_panel_sprite->boundingBox();
+            Rect down_sprite_rect = down_panel_sprite->boundingBox();
 
             if (right_sprite_rect.containsPoint(touch_point)) {
                 auto str = String::create("right");
                 label->setString(str->getCString());
+                way = RIGHT;
+            }
+            else if (left_sprite_rect.containsPoint(touch_point)) {
+                auto str = String::create("left");
+                label->setString(str->getCString());
+                way = LEFT;
+            }
+            else if (up_sprite_rect.containsPoint(touch_point)) {
+                auto str = String::create("up");
+                label->setString(str->getCString());
+                way = UP;
+            }
+            else if (down_sprite_rect.containsPoint(touch_point)) {
+                auto str = String::create("down");
+                label->setString(str->getCString());
+                way = DOWN;
             }
             return true;
         };
@@ -126,7 +150,13 @@ bool HelloWorld::init()
                         label->setString(str->getCString());
 
                         panel_sprite[i][j]->removeFromParentAndCleanup(true);
-                        panel_sprite[i][j] = Sprite::create("right.png");
+
+                        if (way == RIGHT) {
+                            panel_sprite[i][j] = Sprite::create("right.png");
+
+                        }
+
+
                         panel_sprite[i][j]->setAnchorPoint(Vec2(0.5, 0.5));
                         panel_sprite[i][j]->setPosition(origin.x + 170 + i * 30, origin.y + 100 + j * 30);
                         panel_sprite[i][j]->setScale(0.5f);
@@ -139,6 +169,21 @@ bool HelloWorld::init()
         };
         this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
         /*------------------------Event Listener end --------------------------------------*/
+
+
+        /*soldeir*/
+        soldier_sprite = Sprite::create("soldier.png");
+        soldier_sprite->setAnchorPoint(Vec2(0.5, 0.5));
+        soldier_sprite->setPosition(origin.x + 170, origin.y +  100);
+        soldier_sprite->setScale(0.02f);
+        this->addChild(soldier_sprite, 1);
+        soldier_sprite->runAction(Sequence::create(
+            MoveBy::create(5, Vec2(300, 0)),
+            MoveBy::create(5, Vec2(0, 300)),
+            MoveBy::create(5, Vec2(-300, 0)),
+            MoveBy::create(5, Vec2(0, -300)),
+            NULL
+            ));
 
         return true;
     }

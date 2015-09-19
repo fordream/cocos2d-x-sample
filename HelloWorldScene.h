@@ -6,17 +6,22 @@
 class HelloWorld : public cocos2d::Layer
 {
 private:
+    cocos2d::Sprite* field_sprite;
+    cocos2d::Sprite* top_sprite;
+    cocos2d::Sprite* bottom_sprite;
     cocos2d::Sprite* left_panel_sprite;
     cocos2d::Sprite* right_panel_sprite;
     cocos2d::Sprite* up_panel_sprite;
     cocos2d::Sprite* down_panel_sprite;
     cocos2d::Sprite* demon_sprite;
-    cocos2d::Sprite* yusya_sprite;
+    cocos2d::Sprite* soldier_sprite;
     cocos2d::Sprite* panel_sprite[6][6];
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
     cocos2d::Label* label;
-
+    int way;
+    int time = 1;
+    int move_l = 30;
 
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer

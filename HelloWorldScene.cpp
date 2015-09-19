@@ -1,8 +1,8 @@
 #include "HelloWorldScene.h"
-#define RIGHT 111
-#define LEFT 112
-#define UP 113
-#define DOWN 114
+#define PRIGHT 111
+#define PLEFT 112
+#define PUP 113
+#define PDOWN 114
 
 
 USING_NS_CC;
@@ -67,7 +67,6 @@ bool HelloWorld::init()
     }
 
         //panel create
-
         //right
         right_panel_sprite = Sprite::create("right.png");
         right_panel_sprite->setAnchorPoint(Vec2(0.5, 0.5));
@@ -111,22 +110,22 @@ bool HelloWorld::init()
             if (right_sprite_rect.containsPoint(touch_point)) {
                 auto str = String::create("right");
                 label->setString(str->getCString());
-                way = RIGHT;
+                way = PRIGHT;
             }
             else if (left_sprite_rect.containsPoint(touch_point)) {
                 auto str = String::create("left");
                 label->setString(str->getCString());
-                way = LEFT;
+                way = PLEFT;
             }
             else if (up_sprite_rect.containsPoint(touch_point)) {
                 auto str = String::create("up");
                 label->setString(str->getCString());
-                way = UP;
+                way = PUP;
             }
             else if (down_sprite_rect.containsPoint(touch_point)) {
                 auto str = String::create("down");
                 label->setString(str->getCString());
-                way = DOWN;
+                way = PDOWN;
             }
             return true;
         };
@@ -151,11 +150,22 @@ bool HelloWorld::init()
 
                         panel_sprite[i][j]->removeFromParentAndCleanup(true);
 
-                        if (way == RIGHT) {
+                        if (way == PRIGHT) {
                             panel_sprite[i][j] = Sprite::create("right.png");
 
                         }
+                        else if (way == PLEFT) {
+                            panel_sprite[i][j] = Sprite::create("left.png");
 
+                        }
+                        else if (way == PUP) {
+                            panel_sprite[i][j] = Sprite::create("up.png");
+
+                        }
+                        else if (way == PDOWN) {
+                            panel_sprite[i][j] = Sprite::create("down.png");
+
+                        }
 
                         panel_sprite[i][j]->setAnchorPoint(Vec2(0.5, 0.5));
                         panel_sprite[i][j]->setPosition(origin.x + 170 + i * 30, origin.y + 100 + j * 30);
@@ -174,16 +184,39 @@ bool HelloWorld::init()
         /*soldeir*/
         soldier_sprite = Sprite::create("soldier.png");
         soldier_sprite->setAnchorPoint(Vec2(0.5, 0.5));
-        soldier_sprite->setPosition(origin.x + 170, origin.y +  100);
+        soldier_sprite->setPosition(origin.x + 170, origin.y + 100);
         soldier_sprite->setScale(0.02f);
+        auto UP = MoveBy::create(time, Vec2(0, move_l));
+        auto DOWN = MoveBy::create(time, Vec2(0, -move_l));
+        auto RIGHT = MoveBy::create(time, Vec2(move_l, 0));
+        auto LEFT = MoveBy::create(time, Vec2(-move_l, 0));
         this->addChild(soldier_sprite, 1);
         soldier_sprite->runAction(Sequence::create(
-            MoveBy::create(5, Vec2(300, 0)),
-            MoveBy::create(5, Vec2(0, 300)),
-            MoveBy::create(5, Vec2(-300, 0)),
-            MoveBy::create(5, Vec2(0, -300)),
+            RIGHT,
+            UP,
+            UP,
+            RIGHT,
+            DOWN,
+            RIGHT,
+            DOWN,
+            RIGHT,
+            UP,
+            UP,
+            LEFT,
+            UP,
+            LEFT,
+            UP,
+            RIGHT,
+            UP,
+            RIGHT,
+            DOWN,
+            DOWN,
+            RIGHT,
+            UP,
+            UP,
             NULL
             ));
+        
 
         return true;
     }

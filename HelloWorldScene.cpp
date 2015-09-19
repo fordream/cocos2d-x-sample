@@ -55,7 +55,7 @@ bool HelloWorld::init()
         for (int j = 0; j < 6; j++) {
             panel_sprite[i][j] = Sprite::create("field.png");
             panel_sprite[i][j]->setAnchorPoint(Vec2(0.5, 0.5));
-            panel_sprite[i][j]->setPosition(origin.x + 170 + i * 30, origin.y + 170 + j * 30);
+            panel_sprite[i][j]->setPosition(origin.x + 170 + i * 30, origin.y + 100 + j * 30);
             panel_sprite[i][j]->setScale(0.5f);
             this->addChild(panel_sprite[i][j], 1);
         }
@@ -108,7 +108,6 @@ bool HelloWorld::init()
         };
 
         listener->onTouchEnded = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool {
-            /*ƒ^ƒbƒ`Žž‚Ìˆ—*/
             Point touch_point = touch->getLocation();
             Rect pannel_sprite_rect = panel_sprite[0][0]->boundingBox();
 
@@ -117,9 +116,9 @@ bool HelloWorld::init()
                 label->setString(str->getCString());
 
                 panel_sprite[0][0]->removeFromParentAndCleanup(true);
-                panel_sprite[0][0] = Sprite::create("field.png");
+                panel_sprite[0][0] = Sprite::create("right.png");
                 panel_sprite[0][0]->setAnchorPoint(Vec2(0.5, 0.5));
-                panel_sprite[0][0]->setPosition(origin.x + 170, origin.y + 170);
+                panel_sprite[0][0]->setPosition(origin.x + 170, origin.y + 100);
                 panel_sprite[0][0]->setScale(0.5f);
                 this->addChild(panel_sprite[0][0], 1);
 

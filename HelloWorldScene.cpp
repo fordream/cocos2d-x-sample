@@ -55,6 +55,28 @@ bool HelloWorld::init()
         origin.y + visibleSize.height - label->getContentSize().height));
     this->addChild(label, 1);
 
+    /*backgroud create*/
+    /*field_sprite = Sprite::create("back.png");
+    field_sprite->setAnchorPoint(Vec2(0.5, 0.5));
+    field_sprite->setPosition(origin.x + visibleSize.width / 2,origin.y + visibleSize.height / 2);
+    field_sprite->setScale(0.5f);
+    this->addChild(field_sprite, 0);*/
+
+
+    /*top create*/
+    top_sprite = Sprite::create("top.png");
+    top_sprite->setAnchorPoint(Vec2(0.5, 0.5));
+    top_sprite->setPosition(origin.x + 250, origin.y + 250);
+    top_sprite->setScale(0.5f);
+    this->addChild(top_sprite, 0);
+
+    /*bottom create*/
+    bottom_sprite = Sprite::create("bottom.png");
+    bottom_sprite->setAnchorPoint(Vec2(0.5, 0.5));
+    bottom_sprite->setPosition(origin.x + 250, origin.y + 20);
+    bottom_sprite->setScale(0.5f);
+    this->addChild(bottom_sprite, 0);
+
     // field create"
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
@@ -100,7 +122,7 @@ bool HelloWorld::init()
         /*------------------------Event Listener create 2 --------------------------------------*/
         auto listener = EventListenerTouchOneByOne::create();
         listener->onTouchBegan = [this](cocos2d::Touch* touch, cocos2d::Event* event)->bool {
-            /*ƒ^ƒbƒ`Žž‚Ìˆ—*/
+            /*?^?b?`????????*/
             Point touch_point = touch->getLocation();
             Rect right_sprite_rect = right_panel_sprite->boundingBox();
             Rect left_sprite_rect = left_panel_sprite->boundingBox();

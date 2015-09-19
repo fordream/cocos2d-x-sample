@@ -48,18 +48,17 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-
-    // position the label on the center of the screen
+    /*label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(origin.x + visibleSize.width / 2,
         origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+    this->addChild(label, 1);*/
 
     /*top create*/
-    back_sprite = Sprite::create("back.png");
-    back_sprite->setScale(0.01f);
+    back_sprite = Sprite::create("bg3.png");
     back_sprite->setAnchorPoint(Vec2(0.5, 0.5));
-    back_sprite->setPosition(origin.x + 250, origin.y + 250);
+    back_sprite->setPosition(origin.x + visibleSize.width / 2,
+        origin.y + visibleSize.height / 2);
+    back_sprite->setScale(0.5f);
     this->addChild(back_sprite, 0);
 
     /*top create*/
